@@ -1,5 +1,9 @@
 package feri.dugonik.pokerbot;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test {
 
 	/**
@@ -7,22 +11,75 @@ public class Test {
 	 */
 	public static void main(String[] args) 
 	{
-
-		/*
-		 * 
-		 * after the flop - trije koraki:
-		 * 1. hand strength, hand potential
-		 * 2. pravila za stavljanje
-		 * 3. random številka med 0 in 1 in jo uporabimo da izberemo fold, call, raise
-		 * 
-		 */
+		int index;
 		
+		// ustvarimo naključn deck
+		SecureRandom random = new SecureRandom();
 		
+		List<Card> deck = Card.dealNewArray(random, 52);
 		
+		for (int i = 0; i < deck.size(); i++)
+		{
+			Card karta = deck.get(i);
+			
+			System.out.println("rank: " + karta.rank + " suit: " + karta.suit);
+		}
 		
-
+		// dobimo 2 karti iz decka
+		List<Card> mojeKarte = new ArrayList<Card>(2);
+		
+		// prva karta
+		index = random.nextInt(deck.size());
+		mojeKarte.add(deck.get(index));
+		deck.remove(index);
+		
+		// druga karta
+		index = random.nextInt(deck.size());
+		mojeKarte.add(deck.get(index));
+		deck.remove(index);
+		
+		System.out.println("\n\nmoje karte: ");
+		for (int i = 0; i < 2; i++)
+			System.out.println(Card.toString(mojeKarte.get(i)));
+		
+		// na mizo damo 3 karte iz decka
+		List<Card> miza = new ArrayList<Card>(5);
+		
+		// prva karta
+		index = random.nextInt(deck.size());
+		miza.add(deck.get(index));
+		deck.remove(index);
+		
+		// druga karta
+		index = random.nextInt(deck.size());
+		miza.add(deck.get(index));
+		deck.remove(index);
+		
+		// tretja karta
+		index = random.nextInt(deck.size());
+		miza.add(deck.get(index));
+		deck.remove(index);
+		
+		System.out.println("\n\nkarte na mizi: ");
+		for (int i = 0; i < miza.size(); i++)
+			System.out.println(Card.toString(miza.get(i)));
+		
+		//HandStrength(mojeKarte, miza);
 	}
 	
+	private static void HandStrength(Card mojeKarte[], Card miza[])
+	{
+		double handstrength = 0.0;
+		
+		int ahead = 0, behind = 0, tied = 0;
+		
+		//ourrank = 
+		
+		
+		System.out.println("Hand strength: " + handstrength);
+	}
+	
+
 	/*psevodkod:
 	HandStrength(ourcards, boardcards)
 	{
