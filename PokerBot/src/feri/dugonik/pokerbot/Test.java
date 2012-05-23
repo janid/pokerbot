@@ -65,6 +65,10 @@ public class Test {
 			System.out.println(Card.toString(miza.get(i)));
 		
 		//HandStrength(mojeKarte, miza);
+		
+		// testiranje
+		Card k = new Card("Qs");
+		System.out.println("\n\n" + k.rank + "," + k.suit + "\n" + Card.toString(k));
 	}
 	
 	private static void HandStrength(Card mojeKarte[], Card miza[])

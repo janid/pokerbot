@@ -7,8 +7,8 @@ import java.util.List;
 public class Card 
 {
 	private static final int DECKSIZE = 52;
-	private static final String ranks[] = { "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A" };
-    private static final String suits[] = { "c", "d", "h", "s" };
+	private static final char ranks[] = { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
+    private static final char suits[] = { 'c', 'd', 'h', 's' };
     
     public int rank;
     public int suit;
@@ -19,8 +19,25 @@ public class Card
 		suit = s;
 	}
 	
-	public Card(String cards)
+	public Card(String card)
 	{
+		for (int i = 0; i < ranks.length; i++)
+		{
+			if (ranks[i] == card.charAt(0))
+			{	
+				rank = i;
+				break;
+			}
+		}
+		
+		for (int i = 0; i < suits.length; i++)
+		{
+			if (suits[i] == card.charAt(1))
+			{
+				suit = i;
+				break;
+			}
+		}
 		
 	}
 	
@@ -60,6 +77,6 @@ public class Card
 	
 	public static String toString(Card karta)
 	{
-		return ranks[karta.rank] + suits[karta.suit];
+		return "" + ranks[karta.rank] + suits[karta.suit];
 	}
 }
