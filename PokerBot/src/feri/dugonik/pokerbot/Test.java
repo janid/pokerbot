@@ -13,9 +13,6 @@ public class Test {
 	{
 		int index;
 		
-		// testiranje dsakdnaso
-		
-		
 		// ustvarimo naključn deck
 		SecureRandom random = new SecureRandom();
 		
