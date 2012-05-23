@@ -13,7 +13,7 @@ public class Test {
 	{
 		int index;
 		
-		// ustvarimo nakljuÄn deck
+		// ustvarimo nakljuèn deck
 		SecureRandom random = new SecureRandom();
 		
 		List<Card> deck = Card.dealNewArray(random, 52);
