@@ -40,7 +40,7 @@ public class Test {
 		
 		System.out.println("\n\nmoje karte: ");
 		for (int i = 0; i < 2; i++)
-			System.out.println(Card.toString(mojeKarte.get(i)));
+			System.out.println(mojeKarte.get(i).toString());
 		
 		// na mizo damo 3 karte iz decka
 		List<Card> miza = new ArrayList<Card>(5);
@@ -62,13 +62,15 @@ public class Test {
 		
 		System.out.println("\n\nkarte na mizi: ");
 		for (int i = 0; i < miza.size(); i++)
-			System.out.println(Card.toString(miza.get(i)));
+			System.out.println(miza.get(i).toString());
 		
 		//HandStrength(mojeKarte, miza);
 		
 		// testiranje
 		Card k = new Card("Qs");
-		System.out.println("\n\n" + k.rank + "," + k.suit + "\n" + Card.toString(k));
+		System.out.println("\n\n" + k.rank + "," + k.suit + "\n" + (k.toString()));
+		
+		System.out.println("miza: " + Card.arrayToString(miza));
 	}
 	
 	private static void HandStrength(Card mojeKarte[], Card miza[])
