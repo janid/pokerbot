@@ -19,8 +19,8 @@ public class HandAnalysis
 		/*for (int i = 0; i < karte.size(); i++)
 			System.out.println(karte.get(i).toString());*/
 		
-		System.out.println("Bubblesort:");
-		BubbleSort(karte, ">");
+		//System.out.println("Bubblesort:");
+		//BubbleSort(karte, ">");
 		
 		/*for (int i = 0; i < karte.size(); i++)
 			System.out.println(karte.get(i).toString());*/
@@ -37,9 +37,21 @@ public class HandAnalysis
 				break;
 		}
 		// preverimo ranke
-		if (barva == 4)
+		if (barva >= 4)
 		{
 			// sortiraj po ranku!
+			BubbleSort(karte, "<");
+			int rank = 0;
+			for (int i = 1; i < karte.size(); i++)
+			{
+				if (karte.get(i-1).rank > karte.get(i).rank)
+					rank++;
+				else
+					break;
+			}
+			
+			if (rank >= 4)
+				System.out.println("Royal Flush");
 			
 		}
 		
