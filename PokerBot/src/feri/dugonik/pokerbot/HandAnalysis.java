@@ -20,7 +20,7 @@ public class HandAnalysis
 			System.out.println(karte.get(i).toString());*/
 		
 		System.out.println("Bubblesort:");
-		BubbleSortNarascajoce(karte);
+		BubbleSort(karte, ">");
 		
 		/*for (int i = 0; i < karte.size(); i++)
 			System.out.println(karte.get(i).toString());*/
@@ -47,26 +47,58 @@ public class HandAnalysis
 		return 0;
 	}
 	
-	private static void BubbleSortNarascajoce(List<Card> karte)
+	private static void BubbleSort(List<Card> karte, String nacin)
 	{
-		//for (int i = 0; i < karte.size() - 1; i++)
-		//{
-			for (int j = 0; j < karte.size() - 1; j++)
+		int opcija = 1;
+		if (nacin.equals(">"))
+			opcija = 1;
+		else if (nacin.equals("<"))
+			opcija = 2;
+		
+		switch (opcija)
+		{
+			case 1:
 			{
-				System.out.println("prva karta:" + karte.get(j).rank);
-				System.out.println("druga karta:" + karte.get(j+1).rank);
-				
-				if (karte.get(j).rank > karte.get(j+1).rank)
+				for (int i = 0; i < karte.size() - 1; i++)
 				{
-					System.out.println("zamenjamo!");
-					Card tmp = karte.get(j);
-					
-					//karte.add(j, karte.get(j+1));
-					//karte.remove(j);
+					for (int j = 0; j < karte.size() - 1; j++)
+					{
+						if (karte.get(j).rank > karte.get(j+1).rank)
+						{
+							Card tmp = karte.get(j);
+						
+							karte.add(j, karte.get(j+1));
+							karte.remove(j+1);
+							
+							karte.add(j+1, tmp);
+							karte.remove(j+2);
+						}
+					}
 				}
+				break;
 			}
-		//}
-			
+			case 2:
+			{
+				for (int i = 0; i < karte.size() - 1; i++)
+				{
+					for (int j = 0; j < karte.size() - 1; j++)
+					{
+						if (karte.get(j).rank < karte.get(j+1).rank)
+						{
+							Card tmp = karte.get(j);
+						
+							karte.add(j, karte.get(j+1));
+							karte.remove(j+1);
+							
+							karte.add(j+1, tmp);
+							karte.remove(j+2);
+						}
+					}
+				}
+				break;
+			}
+		}
+		
 			for (int i = 0; i < karte.size(); i++)
 				System.out.print(karte.get(i));
 			System.out.println("\n");
