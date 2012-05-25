@@ -11,17 +11,15 @@ public class Test {
 	 */
 	public static void main(String[] args) 
 	{
-		int index;
-		
-		// ustvarimo nakljuèn deck
+		/*int index;
 		SecureRandom random = new SecureRandom();
 		
+		// ustvarimo nakljuÄn deck
 		List<Card> deck = Card.dealNewArray(random, 52);
 		
 		for (int i = 0; i < deck.size(); i++)
 		{
 			Card karta = deck.get(i);
-			
 			System.out.println("rank: " + karta.rank + " suit: " + karta.suit);
 		}
 		
@@ -40,7 +38,7 @@ public class Test {
 		
 		System.out.println("\n\nmoje karte: ");
 		for (int i = 0; i < 2; i++)
-			System.out.println(mojeKarte.get(i).toString());
+			System.out.println(Card.toString(mojeKarte.get(i)));
 		
 		// na mizo damo 3 karte iz decka
 		List<Card> miza = new ArrayList<Card>(5);
@@ -62,30 +60,42 @@ public class Test {
 		
 		System.out.println("\n\nkarte na mizi: ");
 		for (int i = 0; i < miza.size(); i++)
-			System.out.println(miza.get(i).toString());
+			System.out.println(Card.toString(miza.get(i)));*/
 		
-		//HandStrength(mojeKarte, miza);
+		// hand strength
+		List<Card> mojeKarte = new ArrayList<Card>(2);
+		List<Card> miza = new ArrayList<Card>(5);
 		
-		// testiranje
-		Card k = new Card("Qs");
-		System.out.println("\n\n" + k.rank + "," + k.suit + "\n" + (k.toString()));
+		Card karta = new Card("2c");
+		mojeKarte.add(karta);
+		karta = new Card("3c");
+		mojeKarte.add(karta);
+		System.out.println("moje karte: " + Card.arrayToString(mojeKarte));
 		
+		karta = new Card("6c");
+		miza.add(karta);
+		karta = new Card("4c");
+		miza.add(karta);
+		karta = new Card("5c");
+		miza.add(karta);
 		System.out.println("miza: " + Card.arrayToString(miza));
+		
+		HandAnalysis.HandStrength(mojeKarte, miza);
+		
+		// hand potential
+		
+		// testiranje izpisov
+		/*Card k = new Card("Qs");
+		System.out.println("\n\n" + k.rank + "," + k.suit + "\n" + Card.toString(k));
+		
+		System.out.println(Card.arrayToString(miza));
+		System.out.println(Card.arrayToString(mojeKarte));*/
 	}
 	
-	private static void HandStrength(Card mojeKarte[], Card miza[])
-	{
-		double handstrength = 0.0;
-		
-		int ahead = 0, behind = 0, tied = 0;
-		
-		//ourrank = 
-		
-		
-		System.out.println("Hand strength: " + handstrength);
-	}
 	
-
+	
+	
+	
 	/*psevodkod:
 	HandStrength(ourcards, boardcards)
 	{
