@@ -66,17 +66,23 @@ public class Test {
 		List<Card> mojeKarte = new ArrayList<Card>(2);
 		List<Card> miza = new ArrayList<Card>(5);
 		
-		Card karta = new Card("Qc");
+		Card karta = new Card("9d");
 		mojeKarte.add(karta);
-		karta = new Card("Tc");
+		karta = new Card("9c");
 		mojeKarte.add(karta);
 		System.out.println("moje karte: " + Card.arrayToString(mojeKarte));
 		
-		karta = new Card("Ac");
+		karta = new Card("7c");
 		miza.add(karta);
-		karta = new Card("Jc");
+		karta = new Card("9c");
 		miza.add(karta);
-		karta = new Card("Kc");
+		karta = new Card("5c");
+		miza.add(karta);
+		System.out.println("miza: " + Card.arrayToString(miza));
+
+		karta = new Card("8c");
+		miza.add(karta);
+		karta = new Card("5c");
 		miza.add(karta);
 		System.out.println("miza: " + Card.arrayToString(miza));
 		
