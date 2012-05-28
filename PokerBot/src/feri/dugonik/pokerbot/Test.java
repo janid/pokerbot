@@ -60,34 +60,32 @@ public class Test {
 		List<Card> mojeKarte = new ArrayList<Card>(2);
 		List<Card> miza = new ArrayList<Card>(5);
 		
-		Card karta = new Card("9d");
+		Card karta = new Card("7d");
 		mojeKarte.add(karta);
-		karta = new Card("9c");
+		karta = new Card("Ts");
 		mojeKarte.add(karta);
 		System.out.println("moje karte: " + Card.arrayToString(mojeKarte));
 		
-		karta = new Card("7c");
+		karta = new Card("9h");
 		miza.add(karta);
-		karta = new Card("9s");
+		karta = new Card("8s");
 		miza.add(karta);
-		karta = new Card("5c");
+		karta = new Card("5h");
 		miza.add(karta);
 		System.out.println("miza: " + Card.arrayToString(miza));
 		
-		double procenti = HandAnalysis.HandStrength(mojeKarte, miza);
+		/*karta = new Card("2d");
+		miza.add(karta);
+		karta = new Card("Qd");
+		miza.add(karta);
+		System.out.println("miza: " + Card.arrayToString(miza));*/
 		
-		System.out.println("moč: " + procenti * 100);
+		//double procenti = HandAnalysis.HandStrength(mojeKarte, miza);
+		//System.out.println("moč: " + procenti * 100);
 		
-		HandAnalysis.HandPotential(mojeKarte, miza);
+		//HandAnalysis.HandPotential(mojeKarte, miza);
 		
-		// hand potential
-		
-		// testiranje izpisov
-		/*Card k = new Card("Qs");
-		System.out.println("\n\n" + k.rank + "," + k.suit + "\n" + Card.toString(k));
-		
-		System.out.println(Card.arrayToString(miza));
-		System.out.println(Card.arrayToString(mojeKarte));*/
+		HandAnalysis.Rank(mojeKarte, miza);
 	}
 	
 	

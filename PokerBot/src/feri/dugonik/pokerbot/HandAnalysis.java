@@ -1,12 +1,14 @@
 package feri.dugonik.pokerbot;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HandAnalysis 
 {
 	
-	private static int Rank(List<Card> ourcards, List<Card> boardcards)
+	public static int Rank(List<Card> ourcards, List<Card> boardcards)
 	{
 		List<Card> karte = new ArrayList<Card>(5);
 		
@@ -15,12 +17,12 @@ public class HandAnalysis
 		
 		for (int i = 0; i < boardcards.size(); i++)
 			karte.add(boardcards.get(i));
-
+		
 		// sortiraj po ranku!
 		BubbleSort(karte);
 		
-		if (karte.size() > 0)
-			return (int)(Math.random() * 10);
+		//if (karte.size() > 0)
+			//return (int)(Math.random() * 10);
 		
 		// ----- ROYAL in STRAIGHT FLUSH -------	
 		// najprej preverimo barvo
@@ -39,10 +41,8 @@ public class HandAnalysis
 			int rank = 0;
 			for (int i = 1; i < karte.size(); i++)
 			{
-				if (karte.get(i-1).rank > karte.get(i).rank)
+				if (karte.get(i-1).rank == karte.get(i).rank+1)
 					rank++;
-				else
-					break;
 			}
 			
 			if (rank >= 4)
@@ -63,21 +63,96 @@ public class HandAnalysis
 		}
 		
 		// FOUR OF A KIND - popravi!
-		int iste = 0;
-		for (int i = 1; i < karte.size(); i++)
+		// return 8;
+		List<Card> seznamKart = new ArrayList<Card>();
+		List<Integer> stevecKart = new ArrayList<Integer>();
+		boolean obstaja;
+		int index;
+		for (int i = 0; i < karte.size(); i++)
 		{
-			if (karte.get(i-1).rank == karte.get(i).rank)
-				iste++;
+			obstaja = false;
+			index = -1;
+			for (int j = 0; j < seznamKart.size(); j++)
+			{
+				if (seznamKart.get(j).rank == karte.get(i).rank)
+				{
+					obstaja = true;
+					index = j;
+					break;
+				}
+			}
+			
+			if (!obstaja)
+			{
+				seznamKart.add(karte.get(i));
+				stevecKart.add(1);
+			}
+			else
+			{
+				// povečamo števec
+				stevecKart.add(index, stevecKart.get(index) + 1);
+				stevecKart.remove(index + 1);
+			}
+		}
+		/*System.out.println("število kart: " + seznamKart.size());
+		for (int i = 0; i < seznamKart.size(); i++)
+			System.out.println(seznamKart.get(i) + ": " + stevecKart.get(i));*/
+
+		for (int i = 0; i < stevecKart.size(); i++)
+		{
+			// four of a kind
+			if (stevecKart.get(i) == 4)
+			{
+				System.out.println("FOUR OF A KIND");
+				return 8;
+			}
 		}
 		
-		if (iste == 3)
+		// full house
+		int stevec2 = 0;
+		int stevec3 = 0;
+		for (int i = 0; i < stevecKart.size(); i++)
 		{
-			System.out.println("Four of a kind");
-			return 8;
+			if (stevecKart.get(i) == 2)
+			{
+				stevec2++;
+			}
+			if (stevecKart.get(i) == 3)
+			{
+				stevec3++;
+			}
+		}
+		if (stevec2 >= 1 && stevec3 >= 1)
+		{
+			System.out.println("FULL HOUSE");
+			return 7;
+		}
+		else if (stevec3 >= 1)
+		{
+			System.out.println("THREE OF A KIND");
+			return 4;
 		}
 		
-		// FULL HOUSE - popravi!
-		// return 7;
+		
+		// two pair, one pair
+		int stevec = 0;
+		for (int i = 0; i < stevecKart.size(); i++)
+		{
+			if (stevecKart.get(i) == 2)
+			{
+				stevec++;
+			}
+		}
+		if (stevec == 2)
+		{
+			System.out.println("TWO PAIR");
+			return 3;
+		}
+		else if (stevec == 1)
+		{
+			System.out.println("ONE PAIR");
+			return 2;
+		}
 		
 		// FLUSH
 		barva = 0;
@@ -99,10 +174,8 @@ public class HandAnalysis
 		int rank = 0;
 		for (int i = 1; i < karte.size(); i++)
 		{
-			if (karte.get(i-1).rank > karte.get(i).rank)
+			if (karte.get(i-1).rank == karte.get(i).rank+1)
 				rank++;
-			else
-				break;
 		}
 		
 		if (rank >= 4)
@@ -111,29 +184,8 @@ public class HandAnalysis
 			return 5;
 		}
 		
-		// THREE OF A KIND - popravi!
-		iste = 0;
-		for (int i = 1; i < karte.size(); i++)
-		{
-			if (karte.get(i-1).rank == karte.get(i).rank)
-				iste++;
-		}
-		
-		if (iste == 2)
-		{
-			System.out.println("Three of a kind");
-			return 4;
-		}
-		
-		
-		// TWO PAIR - popravi!
-		// return 3;
-		
-		// ONE PAIR - popravi!
-		// return 2;
-		
 		// HIGH CARD
-		System.out.println("High card");
+		System.out.println("High card " + karte.get(0));
 		return 1;
 	}
 	
@@ -200,7 +252,7 @@ public class HandAnalysis
 			else
 				behind += 1;
 			
-			//System.out.println(ourrank + ":" + opprank);
+			System.out.println(ourrank + ":" + opprank);
 		}
 		
 		return ((double)(ahead+tied/2) / (double)(ahead+tied+behind));
@@ -209,7 +261,6 @@ public class HandAnalysis
 	public static void HandPotential(List<Card> mojeKarte, List<Card> miza)
 	{
 		int HP[][] = new int[3][3];
-		//int HPTotal[][] = new int[3][3];
 		int HPTotal[] = new int[3];
 		
 		int ahead = 0, tied = 1, behind = 2, index;
@@ -264,8 +315,11 @@ public class HandAnalysis
 					board.add(turn);
 					board.add(river);
 					
+					//System.out.print("ourbest: ");
 					int ourbest = Rank(mojeKarte, board);
+					//System.out.print("\noppbest: ");
 					int oppbest = Rank(nasprotnikoveKarte, board);
+					//System.out.println();
 					
 					if (ourbest > oppbest)
 						HP[index][ahead] += 1;
@@ -277,19 +331,14 @@ public class HandAnalysis
 				
 				noviDeck.add(j, turn);
 			}
-			
-			// positive potencial - možnost da se nam možnosti za zmago poboljšajo
-			double PPot = (double)(HP[behind][ahead] + HP[behind][tied]/2 + HP[tied][ahead]/2) / (double)(HPTotal[behind]+ HPTotal[tied]/2);
-			
-			// negative potencial - možnost da se nam možnosti za zmago poslabšajo
-			double NPot = (double)(HP[ahead][behind] + HP[tied][behind]/2 + HP[ahead][tied]/2) / (double)(HPTotal[ahead] + HPTotal[tied]/2);
-			
-			System.out.println("PPot: " + PPot + "\nNPot: " + NPot);
-			
-			// kaj narediti z PPot in NPot??? meje??
 		}
 		
+		// positive potencial - možnost da se nam možnosti za zmago poboljšajo
+		double PPot = (double)(HP[behind][ahead] + HP[behind][tied]/2 + HP[tied][ahead]/2) / (double)(HPTotal[behind]+ HPTotal[tied]/2);
 		
+		// negative potencial - možnost da se nam možnosti za zmago poslabšajo
+		double NPot = (double)(HP[ahead][behind] + HP[tied][behind]/2 + HP[ahead][tied]/2) / (double)(HPTotal[ahead] + HPTotal[tied]/2);
 		
+		System.out.println("PPot: " + PPot + "\nNPot: " + NPot);
 	}
 }
