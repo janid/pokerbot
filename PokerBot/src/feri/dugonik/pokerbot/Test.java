@@ -11,7 +11,7 @@ public class Test {
 	 */
 	public static void main(String[] args) 
 	{
-		/*int index;
+		int index;
 		SecureRandom random = new SecureRandom();
 		
 		// ustvarimo nakljuÄn deck
@@ -54,38 +54,18 @@ public class Test {
 		
 		System.out.println("\nkarte na mizi: ");
 		for (int i = 0; i < miza.size(); i++)
-			System.out.println(miza.get(i).toString());*/
+			System.out.println(miza.get(i).toString());
+	
 		
-		// hand strength
-		List<Card> mojeKarte = new ArrayList<Card>(2);
-		List<Card> miza = new ArrayList<Card>(5);
+		double procenti = HandAnalysis.HandStrength(mojeKarte, miza);
+		System.out.println("moè: " + procenti * 100);
 		
-		Card karta = new Card("7d");
-		mojeKarte.add(karta);
-		karta = new Card("Ts");
-		mojeKarte.add(karta);
-		System.out.println("moje karte: " + Card.arrayToString(mojeKarte));
+		HandAnalysis.HandPotential(mojeKarte, miza);
 		
-		karta = new Card("9h");
-		miza.add(karta);
-		karta = new Card("8s");
-		miza.add(karta);
-		karta = new Card("5h");
-		miza.add(karta);
-		System.out.println("miza: " + Card.arrayToString(miza));
+		// hand potential priredi za turn in river!!
 		
-		/*karta = new Card("2d");
-		miza.add(karta);
-		karta = new Card("Qd");
-		miza.add(karta);
-		System.out.println("miza: " + Card.arrayToString(miza));*/
+		// èe je PPot veèji od NPot, imamo veèjo šanso da bomo zmagali in obratno :)- še stestiraj!
 		
-		//double procenti = HandAnalysis.HandStrength(mojeKarte, miza);
-		//System.out.println("moÄ: " + procenti * 100);
-		
-		//HandAnalysis.HandPotential(mojeKarte, miza);
-		
-		HandAnalysis.Rank(mojeKarte, miza);
 	}
 	
 	

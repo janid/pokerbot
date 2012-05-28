@@ -50,12 +50,12 @@ public class HandAnalysis
 				// ROYAL FLUSH
 				if (karte.get(0).rank == 12)
 				{
-					System.out.println("Royal flush");
+					//System.out.println("Royal flush");
 					return 10;
 				}
 				else // STRAIGHT FLUSH
 				{
-					System.out.println("Straight flush");
+					//System.out.println("Straight flush");
 					return 9;
 				}
 			}
@@ -103,7 +103,7 @@ public class HandAnalysis
 			// four of a kind
 			if (stevecKart.get(i) == 4)
 			{
-				System.out.println("FOUR OF A KIND");
+				//System.out.println("FOUR OF A KIND");
 				return 8;
 			}
 		}
@@ -124,12 +124,12 @@ public class HandAnalysis
 		}
 		if (stevec2 >= 1 && stevec3 >= 1)
 		{
-			System.out.println("FULL HOUSE");
+			//System.out.println("FULL HOUSE");
 			return 7;
 		}
 		else if (stevec3 >= 1)
 		{
-			System.out.println("THREE OF A KIND");
+			//System.out.println("THREE OF A KIND");
 			return 4;
 		}
 		
@@ -145,12 +145,12 @@ public class HandAnalysis
 		}
 		if (stevec == 2)
 		{
-			System.out.println("TWO PAIR");
+			//System.out.println("TWO PAIR");
 			return 3;
 		}
 		else if (stevec == 1)
 		{
-			System.out.println("ONE PAIR");
+			//System.out.println("ONE PAIR");
 			return 2;
 		}
 		
@@ -166,7 +166,7 @@ public class HandAnalysis
 		
 		if (barva >= 4)
 		{
-			System.out.println("Flush");
+			//System.out.println("Flush");
 			return 6;
 		}
 		
@@ -180,12 +180,12 @@ public class HandAnalysis
 		
 		if (rank >= 4)
 		{
-			System.out.println("Straight");
+			//System.out.println("Straight");
 			return 5;
 		}
 		
 		// HIGH CARD
-		System.out.println("High card " + karte.get(0));
+		//System.out.println("High card " + karte.get(0));
 		return 1;
 	}
 	
@@ -252,7 +252,7 @@ public class HandAnalysis
 			else
 				behind += 1;
 			
-			System.out.println(ourrank + ":" + opprank);
+			//System.out.println(ourrank + ":" + opprank);
 		}
 		
 		return ((double)(ahead+tied/2) / (double)(ahead+tied+behind));
