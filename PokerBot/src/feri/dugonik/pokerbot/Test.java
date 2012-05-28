@@ -16,13 +16,7 @@ public class Test {
 		
 		// ustvarimo naključn deck
 		List<Card> deck = Card.dealNewArray(random, 52);
-		
-		for (int i = 0; i < deck.size(); i++)
-		{
-			Card karta = deck.get(i);
-			System.out.println("rank: " + karta.rank + " suit: " + karta.suit);
-		}
-		
+			
 		// dobimo 2 karti iz decka
 		List<Card> mojeKarte = new ArrayList<Card>(2);
 		
@@ -36,9 +30,9 @@ public class Test {
 		mojeKarte.add(deck.get(index));
 		deck.remove(index);
 		
-		System.out.println("\n\nmoje karte: ");
+		System.out.println("moje karte: ");
 		for (int i = 0; i < 2; i++)
-			System.out.println(Card.toString(mojeKarte.get(i)));
+			System.out.println(mojeKarte.get(i).toString());
 		
 		// na mizo damo 3 karte iz decka
 		List<Card> miza = new ArrayList<Card>(5);
@@ -58,9 +52,9 @@ public class Test {
 		miza.add(deck.get(index));
 		deck.remove(index);
 		
-		System.out.println("\n\nkarte na mizi: ");
+		System.out.println("\nkarte na mizi: ");
 		for (int i = 0; i < miza.size(); i++)
-			System.out.println(Card.toString(miza.get(i)));*/
+			System.out.println(miza.get(i).toString());*/
 		
 		// hand strength
 		List<Card> mojeKarte = new ArrayList<Card>(2);
@@ -74,19 +68,17 @@ public class Test {
 		
 		karta = new Card("7c");
 		miza.add(karta);
-		karta = new Card("9c");
-		miza.add(karta);
-		karta = new Card("5c");
-		miza.add(karta);
-		System.out.println("miza: " + Card.arrayToString(miza));
-
-		karta = new Card("8c");
+		karta = new Card("9s");
 		miza.add(karta);
 		karta = new Card("5c");
 		miza.add(karta);
 		System.out.println("miza: " + Card.arrayToString(miza));
 		
-		HandAnalysis.HandStrength(mojeKarte, miza);
+		double procenti = HandAnalysis.HandStrength(mojeKarte, miza);
+		
+		System.out.println("moč: " + procenti * 100);
+		
+		HandAnalysis.HandPotential(mojeKarte, miza);
 		
 		// hand potential
 		

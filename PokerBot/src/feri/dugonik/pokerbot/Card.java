@@ -38,18 +38,16 @@ public class Card
 				break;
 			}
 		}
-		
 	}
 	
-	public static Card[] getAllCards()
+	public static List<Card> getAllCards()
 	{
-        Card[] deck = new Card[DECKSIZE];
-        int index = 0;
+		List<Card> deck = new ArrayList<Card>(DECKSIZE);
 
         for (int i = 0; i < ranks.length; i++)
         {
         	for (int j = 0; j < suits.length; j++)
-        		deck[index++] = new Card(i, j);
+        		deck.add(new Card(i, j));
         }
         
         return deck;
@@ -57,22 +55,22 @@ public class Card
 	
 	public static List<Card> dealNewArray(SecureRandom random, int numCardsToDeal)
 	{
-        Card[] deck = getAllCards();
-        
+		List<Card> deck = getAllCards();
+		
         for(int i = 0; i < numCardsToDeal; i++)
         {
             int toSwap = random.nextInt(DECKSIZE-i)+i;
-            Card temp = deck[i];
-            deck[i] = deck[toSwap];
-            deck[toSwap] = temp;
+            
+            Card temp = deck.get(i);
+            
+            deck.add(i, deck.get(toSwap));
+            deck.remove(i+1);
+            
+            deck.add(toSwap, temp);
+            deck.remove(toSwap+1);
         }
         
-        List<Card> result = new ArrayList<Card>(numCardsToDeal);
-        
-        for(int i = 0; i < numCardsToDeal; i++)
-        	result.add(deck[i]);
-        
-        return result;
+        return deck;
     }
 	
 	public static String arrayToString(List<Card> cards)
