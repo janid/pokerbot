@@ -1,4 +1,4 @@
-package feri.dugonik.pokerbot;
+package si.feri.is.poker.agent;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -88,3 +88,4 @@ public class Card
 		return "" + ranks[this.rank] + suits[this.suit];
 	}
 }
+

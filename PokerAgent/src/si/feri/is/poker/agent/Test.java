@@ -1,4 +1,4 @@
-package feri.dugonik.pokerbot;
+package si.feri.is.poker.agent;
 
 import java.io.IOException;
 import java.security.SecureRandom;
