@@ -71,9 +71,9 @@ public class HandStatus {
 	private Integer myBet; 
 	
 	/**
-	 * oponents bet
+	 * opponents bet
 	 */
-	private Integer oponentsBet;
+	private Integer opponentsBet;
 	
 	/**
 	 * constructor
@@ -91,7 +91,7 @@ public class HandStatus {
 		isMyTurn = Boolean.FALSE;
 		
 		myBet = 0;
-		oponentsBet = 0;
+		opponentsBet = 0;
 	}
 	
 	public Vector<Card> getHandCards() {
@@ -179,12 +179,12 @@ public class HandStatus {
 		this.myBet = myBet;
 	}
 
-	public Integer getOponentsBet() {
-		return oponentsBet;
+	public Integer getOpponentsBet() {
+		return opponentsBet;
 	}
 
-	public void setOponentsBet(Integer oponentsBet) {
-		this.oponentsBet = oponentsBet;
+	public void setOpponentsBet(Integer opponentsBet) {
+		this.opponentsBet = opponentsBet;
 	}
 	
 
@@ -232,8 +232,8 @@ public class HandStatus {
 		buff.append("MONEY on table:   ");
 		buff.append("me: ");
 		buff.append(myBet);
-		buff.append(", oponent: ");
-		buff.append(oponentsBet);
+		buff.append(", opponent: ");
+		buff.append(opponentsBet);
 		buff.append(Defs.NEWLINE);
 
 		buff.append("-------------------");

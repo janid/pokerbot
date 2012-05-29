@@ -2,6 +2,7 @@ package si.feri.is.poker.agent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class HandAnalysis 
 {
@@ -16,7 +17,7 @@ public class HandAnalysis
          
         // pozicija za mizo
         //boolean semDelilec = hand.amDealer();
-     
+     /*
         //karte
         List<Card> flopKarte = hand.getFlopCards(); //lahko je prazno
         Card turnCard = hand.getTurnCard();
@@ -29,7 +30,7 @@ public class HandAnalysis
         //akcije
         //List<List<Action>> akcijePoVrsti = hand.getActions();
         List<List<Action>> akcijePoVrsti = hand.getActions();
-         
+         */
         
          
         //TODO: Jani vrne nekaj od tega spodaj!
@@ -37,7 +38,49 @@ public class HandAnalysis
 //      return new Action(false);   // FOLD
 //      return new Action(1000);    // RAISE
          
-        return null;
+    	// dobimo pozicijo
+    	boolean semDelilec = hand.amDealer();
+    	
+    	// dobimo total pot
+    	Integer totalPot = hand.getMyBet() + hand.getOpponentsBet();
+    	
+    	// dobimo karte
+    	List<Card> flop = hand.getFlopCards();
+    	Card turn = hand.getTurnCard();
+    	Card river = hand.getRiverCard();
+    	
+    	// PREFLOP
+    	if (flop.size() == 0)
+    	{
+    		
+    	}
+    	
+    	
+    	// FLOP
+    	if (flop.size() != 0 && turn == null)
+    	{
+    		
+    	}
+    	
+    	// TURN
+    	if (flop.size() != 0 && turn != null && river == null)
+    	{
+    		
+    	}
+    	
+    	// RIVER
+    	if (flop.size() != 0 && turn != null && river != null)
+    	{
+    		
+    	}
+    	
+		Random rnd = new Random();
+		if (rnd.nextDouble() > 0.33)
+			return new Action(false);	// FOLD
+	    else if (rnd.nextDouble() > 0.66)
+	    	return new Action(true);	// CALL
+	    else 
+	    	return new Action(rnd.nextInt(20000));	// RAISE
     }
     
 	public static int Rank(List<Card> ourcards, List<Card> boardcards)

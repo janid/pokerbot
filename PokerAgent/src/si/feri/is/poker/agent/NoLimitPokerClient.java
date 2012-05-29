@@ -36,15 +36,26 @@ public class NoLimitPokerClient extends PokerClient {
 			PokerServerMessageParser parser = new PokerServerMessageParser(currentGameStateString);
 			handStatus = parser.getHandStatus();
 			
+			Action akcija = HandAnalysis.getHandAction(handStatus);
 			
-
-			/*if (random.nextDouble() > 0.33) {
+			
+			//sendFold();
+			//sendCall();
+			//sendRaise(20000);
+			
+			if (akcija.isFold)
+			{
 				sendFold();
-			} else if (random.nextDouble() > 0.66) {
+			}
+			else if (akcija.isCall)
+			{
 				sendCall();
-			} else {
-				sendRaise(random.nextInt(20000));
-			}*/
+			}
+			else if (akcija.isRaise())
+			{
+				sendRaise(akcija.getRaiseValue());
+			}
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

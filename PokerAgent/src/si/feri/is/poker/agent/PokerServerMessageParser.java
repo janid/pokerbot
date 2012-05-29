@@ -212,10 +212,10 @@ public class PokerServerMessageParser {
 		
 		if(hand.amDealer()) {
 			hand.setMyBet(dealersBet);
-			hand.setOponentsBet(playersBet);
+			hand.setOpponentsBet(playersBet);
 		} else {
 			hand.setMyBet(playersBet);
-			hand.setOponentsBet(dealersBet);
+			hand.setOpponentsBet(dealersBet);
 			
 			//negiram ker nisem dealer, torej ce je on na vrsti, jaz nisem
 			dealersAction = !dealersAction;
