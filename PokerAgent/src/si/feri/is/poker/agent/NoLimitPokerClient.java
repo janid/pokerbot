@@ -8,7 +8,7 @@ import java.security.SecureRandom;
 import si.feri.is.poker.Defs;
 import si.feri.is.poker.PokerClient;
 
-public class MyPokerClient extends PokerClient {
+public class NoLimitPokerClient extends PokerClient {
 
 	@SuppressWarnings("unused")
 	private HandStatus handStatus;
@@ -18,7 +18,7 @@ public class MyPokerClient extends PokerClient {
 	/**
 	 * Creates a new instance of RandomPokerClient
 	 */
-	public MyPokerClient() {
+	public NoLimitPokerClient() {
 		super();
 	}
 
@@ -38,13 +38,13 @@ public class MyPokerClient extends PokerClient {
 			
 			
 
-			if (random.nextDouble() > 0.33) {
+			/*if (random.nextDouble() > 0.33) {
 				sendFold();
 			} else if (random.nextDouble() > 0.66) {
 				sendCall();
 			} else {
 				sendRaise(random.nextInt(20000));
-			}
+			}*/
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class MyPokerClient extends PokerClient {
 	 *            --the command line parameters (IP and port)
 	 */
 	public static void main(String[] args) throws Exception {
-		MyPokerClient mpc = new MyPokerClient();
+		NoLimitPokerClient mpc = new NoLimitPokerClient();
 		System.out.println("Attempting to connect to ...");
 
 		mpc.connect(InetAddress.getByName(Defs.SERVER_ADDRESS), Defs.SERVER_PORT2);

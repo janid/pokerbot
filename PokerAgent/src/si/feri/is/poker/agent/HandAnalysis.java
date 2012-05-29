@@ -30,7 +30,7 @@ public class HandAnalysis
         //List<List<Action>> akcijePoVrsti = hand.getActions();
         List<List<Action>> akcijePoVrsti = hand.getActions();
          
- 
+        
          
         //TODO: Jani vrne nekaj od tega spodaj!
 //      return new Action(true);    // CALL
