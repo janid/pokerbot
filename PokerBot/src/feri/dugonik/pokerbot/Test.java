@@ -1,6 +1,8 @@
 package feri.dugonik.pokerbot;
 
+import java.io.IOException;
 import java.security.SecureRandom;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,34 +10,57 @@ public class Test {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException 
 	{
 		int index;
 		SecureRandom random = new SecureRandom();
+		DecimalFormat df = new DecimalFormat("#.##");
+		double moc;
+		double potencial[] = new double[2];
 		
 		// ustvarimo nakljuƒçn deck
 		List<Card> deck = Card.dealNewArray(random, 52);
 			
 		// dobimo 2 karti iz decka
 		List<Card> mojeKarte = new ArrayList<Card>(2);
-		
-		// prva karta
-		index = random.nextInt(deck.size());
-		mojeKarte.add(deck.get(index));
-		deck.remove(index);
-		
-		// druga karta
-		index = random.nextInt(deck.size());
-		mojeKarte.add(deck.get(index));
-		deck.remove(index);
-		
-		System.out.println("moje karte: ");
-		for (int i = 0; i < 2; i++)
-			System.out.println(mojeKarte.get(i).toString());
+		List<Card> nasprotnikoveKarte = new ArrayList<Card>(2);
 		
 		// na mizo damo 3 karte iz decka
 		List<Card> miza = new ArrayList<Card>(5);
+				
+		// moja prva karta
+		index = random.nextInt(deck.size());
+		mojeKarte.add(deck.get(index));
+		deck.remove(index);
+		
+		// nasprotnikova prva karta
+		index = random.nextInt(deck.size());
+		nasprotnikoveKarte.add(deck.get(index));
+		deck.remove(index);
+		
+		// moja druga karta
+		index = random.nextInt(deck.size());
+		mojeKarte.add(deck.get(index));
+		deck.remove(index);
+
+		// nasprotnikova druga karta
+		index = random.nextInt(deck.size());
+		nasprotnikoveKarte.add(deck.get(index));
+		deck.remove(index);
+		
+		System.out.print("moje karte: ");
+		for (int i = 0; i < 2; i++)
+			System.out.print(mojeKarte.get(i).toString() + " ");
+		
+		// moƒç kart
+		moc = HandAnalysis.HandStrength(mojeKarte, miza);
+		System.out.println("\n\nMoƒç: " + df.format(moc));
+
+		System.out.println("\nFLOP");
+		//System.out.println("\n\nPritisni tipko za flop..");
+		//System.in.read();
 		
 		// prva karta
 		index = random.nextInt(deck.size());
@@ -52,26 +77,96 @@ public class Test {
 		miza.add(deck.get(index));
 		deck.remove(index);
 		
-		System.out.println("\nkarte na mizi: ");
+		System.out.println("karte na mizi: ");
 		for (int i = 0; i < miza.size(); i++)
-			System.out.println(miza.get(i).toString());
+			System.out.print(miza.get(i).toString() + " ");
 	
+		// moƒç kart
+		moc = HandAnalysis.HandStrength(mojeKarte, miza);
+		System.out.println("\n\nMoƒç: " + df.format(moc));
 		
-		double procenti = HandAnalysis.HandStrength(mojeKarte, miza);
-		System.out.println("moË: " + procenti * 100);
+		// potencial kart
+		potencial = HandAnalysis.HandPotential(mojeKarte, miza);
+		System.out.println("Pozitivni potencial: " + df.format(potencial[0]));
+		System.out.println("Negativni potencial: " + df.format(potencial[1]));
 		
-		HandAnalysis.HandPotential(mojeKarte, miza);
+		System.out.println("\nTURN");
+		//System.out.println("\n\nPritisni tipko za turn..");
+		//System.in.read();
 		
-		// hand potential priredi za turn in river!!
+		// turn
+		index = random.nextInt(deck.size());
+		miza.add(deck.get(index));
+		System.out.println(deck.get(index).toString());
+		deck.remove(index);
 		
-		// Ëe je PPot veËji od NPot, imamo veËjo öanso da bomo zmagali in obratno :)- öe stestiraj!
+		// moƒç kart
+		moc = HandAnalysis.HandStrength(mojeKarte, miza);
+		System.out.println("\n\nMoƒç: " + df.format(moc));
 		
+		// potencial kart
+		potencial = HandAnalysis.HandPotential(mojeKarte, miza, miza.get(miza.size()-1));
+		System.out.println("Pozitivni potencial: " + df.format(potencial[0]));
+		System.out.println("Negativni potencial: " + df.format(potencial[1]));
+		
+		System.out.println("\nRIVER");
+		//System.out.println("\nPritisni tipko za river..");
+		//System.in.read();
+		
+		// river
+		index = random.nextInt(deck.size());
+		miza.add(deck.get(index));
+		System.out.println(deck.get(index).toString());
+		deck.remove(index);
+		
+		// moƒç kart
+		moc = HandAnalysis.HandStrength(mojeKarte, miza);
+		System.out.println("\nMoƒç: " + df.format(moc));
+		
+		System.out.println("\nKONEC");
+		//System.out.println("\nPritisni tipko za konec..");
+		//System.in.read();
+		
+		// izpis mojih kart
+		System.out.print("moje karte: ");
+		for (int i = 0; i < 2; i++)
+			System.out.print(mojeKarte.get(i).toString());
+		System.out.println();
+
+		// izpis mojih kart
+		System.out.print("nasprotnikove karte: ");
+		for (int i = 0; i < 2; i++)
+			System.out.print(nasprotnikoveKarte.get(i).toString());
+		System.out.println();
+		
+		int zmagovalec = HandAnalysis.GetWinner(mojeKarte, nasprotnikoveKarte, miza);
+		
+		System.out.print("Miza: ");
+		for (int i = 0; i < miza.size(); i++)
+			System.out.print(miza.get(i).toString() + " ");
+		System.out.println();
+		
+		switch (zmagovalec)
+		{
+			case 0:
+			{
+				System.out.println("Zmagovalec je igralec!");
+				break;
+			}
+			case 1:
+			{
+				System.out.println("Izenaƒçeno!");
+				break;
+			}
+			case 2:
+			{
+				System.out.println("Zmagovalec je nasprotnik!");
+				break;
+			}
+		}
+		
+		System.out.println("\nKonec!");
 	}
-	
-	
-	
-	
-	
 	/*psevodkod:
 	HandStrength(ourcards, boardcards)
 	{
