@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.security.SecureRandom;
+import java.util.List;
 
 import si.feri.is.poker.Defs;
 import si.feri.is.poker.PokerClient;
@@ -38,6 +39,15 @@ public class NoLimitPokerClient extends PokerClient {
 			
 			Action akcija = HandAnalysis.getHandAction(handStatus);
 			
+			/*List<List<Action>> akcijePoVrsti = handStatus.getActions();
+			
+			for (int i = 0; i < akcijePoVrsti.size(); i++)
+			{
+				for (int j = 0; j < akcijePoVrsti.get(i).size(); i++)
+				{
+					System.out.println(akcijePoVrsti.get(i).get(j));
+				}
+			}*/
 			
 			//sendFold();
 			//sendCall();
