@@ -42,7 +42,9 @@ public class HandAnalysis
     	boolean semDelilec = hand.amDealer();
     	
     	// dobimo total pot
-    	Integer totalPot = hand.getMyBet() + hand.getOpponentsBet();
+    	Integer mojaStava = hand.getMyBet();
+    	Integer nasprotnikovaStava =  hand.getOpponentsBet();
+    	Integer totalPot = mojaStava + nasprotnikovaStava;
     	
     	// dobimo karte
     	List<Card> flop = hand.getFlopCards();
@@ -80,7 +82,7 @@ public class HandAnalysis
 	    else if (rnd.nextDouble() > 0.66)
 	    	return new Action(true);	// CALL
 	    else 
-	    	return new Action(rnd.nextInt(20000));	// RAISE
+	    	return new Action(rnd.nextInt(20000 - mojaStava) + mojaStava);	// RAISE 
     }
     
 	public static int Rank(List<Card> ourcards, List<Card> boardcards)
@@ -95,9 +97,6 @@ public class HandAnalysis
 		
 		// sortiraj po ranku!
 		BubbleSort(karte);
-		
-		//if (karte.size() > 0)
-			//return (int)(Math.random() * 10);
 		
 		// ----- ROYAL in STRAIGHT FLUSH -------	
 		// najprej preverimo barvo

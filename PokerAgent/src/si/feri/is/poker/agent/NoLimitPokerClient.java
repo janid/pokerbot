@@ -39,20 +39,6 @@ public class NoLimitPokerClient extends PokerClient {
 			
 			Action akcija = HandAnalysis.getHandAction(handStatus);
 			
-			/*List<List<Action>> akcijePoVrsti = handStatus.getActions();
-			
-			for (int i = 0; i < akcijePoVrsti.size(); i++)
-			{
-				for (int j = 0; j < akcijePoVrsti.get(i).size(); i++)
-				{
-					System.out.println(akcijePoVrsti.get(i).get(j));
-				}
-			}*/
-			
-			//sendFold();
-			//sendCall();
-			//sendRaise(20000);
-			
 			if (akcija.isFold)
 			{
 				sendFold();
